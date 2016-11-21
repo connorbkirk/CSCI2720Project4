@@ -28,6 +28,8 @@ void creatfile(int num, bool sorted, bool reverse, string name){//opens file and
   ofstream myfile;
 
   myfile.open(name);
+  
+  myfile << num << endl; //prints the numebr of data points on a line before the data
 
   srand(time(0));//seeds random generater
 
