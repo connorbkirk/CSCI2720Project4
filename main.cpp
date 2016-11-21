@@ -1,77 +1,32 @@
-#include <cstdio>
-#include <cstdlib>
-#include <ctime>
 #include <iostream>
+#include <array>
 #include "Sorting.h"
 
 using namespace std;
+void printArray(int* array, int length){
+  for(int i = 0; i < length; i++)
+    cout << array[i] << " ";
+  cout << endl << endl;
+}
 
-// PROTOTYPES
-
-template <typename T> void randomizeArray(T *, int);
-template <typename T> void printArray(T *, int);
-
-
-
-// MAIN
+void revert(int*array, int* safe, int length){
+  for(int i =0;i<legnth; i++)
+    array[i] = safe[i];
+}
 
 int main(){
+  int num;
+  cin >> num;
+  int stuff[num];//array to sort
+  int safeStuff[num];//never to be changed, only to reset from
+  for(int i = 0; i < num; i++){//fills array with information from file
+    cin >> stuff[i];
+    safeStuff[i] = stuff[i];
+  }
+  //timestamp
+  bubbleSort(stuff, num);
+  //timestamp
+  //revert(stuff,safeStuff,num); reverts array back for the rest of the sort calls
 
-	cout << endl;	
-
-	// Allocate space
-	int length = 15;
-	int * array = new int[length];
-
-
-	randomizeArray(array, length);
-
-	printArray(array, length);
-
-	bubbleSort(array, length);
-
-	printArray(array, length);
-
-
-	// Deallocate space	
-	delete[] array;
-	return 0;
-}
-
-
-
-// FUNCTIONS
-
-template <typename T> void randomizeArray(T * array,int length){
-
-	// Honestly this technique could just be run once to write 200,000
-	// random ints into a file for the project.
-
-	// Defines range from 1 to 100
-	int max = 100;
-	int min = 1;
-
-
-	// Seeds the random variable
-    srand(time(0));
-
-	int a = 0;
-
-	for(int i = 0; i < length; i++){
-
-    	a = rand();
-
-		// converts huge number to be of range [1, 100]
-		a = a % max + min;
-
-		array[i] = a;
-	}	
-}
-
-template <typename T> void printArray(T * array,int length){
-
-	for(int i = 0; i < length; i++)
-        cout << array[i] << " ";
-    cout << endl << endl;
 
 }
