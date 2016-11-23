@@ -60,3 +60,50 @@ void selectionSort(T * array, int length){
 
   }
 }
+
+
+template <typename T>
+void ReheapDown(T *& array, int root, int bottom){
+  int maxChild, rightChild, leftChild;
+
+  leftChild = root * 2 + 1;
+  rightChild = root * 2 + 2;
+
+  if(leftChild <= bottom){
+    if(leftChild == bottom)
+      maxChild = leftChild;
+    else{
+      if(array[leftChild] <= array[rightChild])
+	maxChild = rightChild;
+      else
+	maxChild = leftChild;
+    }
+    if(array[root] < array[maxChild]){
+      T temp = array[root];
+      array[root] = array[maxChild];
+      array[maxChild] = temp;
+
+      ReheapDown(array, maxChild, bottom);
+    }
+  }
+}
+
+
+
+template <typename T>
+void HeapSort(T * array, int length){
+  int index;
+
+  //convert array of values to a heap
+  for(index = length/2-1; index >=0; index--)
+    ReheapDown(array, index, length-1);
+
+  //sort the array
+  for(index = length-1; index >= 1; index--){
+    T temp = array[0];
+    array[0] = array[index];
+    array[index] = temp;
+
+    ReheapDown(array, 0, index-1);
+  }
+}
