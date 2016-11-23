@@ -10,7 +10,7 @@ void printArray(int* array, int length){
 }
 
 void revert(int*array, int* safe, int length){
-  for(int i =0;i<legnth; i++)
+  for(int i =0;i<length; i++)
     array[i] = safe[i];
 }
 

@@ -25,18 +25,38 @@ template <typename T>
 void insertionSort(T * array, int length){
   bool finished = false;
   int current = length-1;
-  bool moreToSearch = (current!=startIndex);
+  bool moreToSearch = (current!=0);
   
   while(moreToSearch && !finished){
-    if(values[current] < values[current-1]){
+    if(array[current] < array[current-1]){
       T temp = array[current];
       array[current] = array[current-1];
       array[current-1] = temp;
 
       current--;
-      moreToSearch = (current != startIndex);
+      moreToSearch = (current != 0);
     }
     else
       finished = true;
+  }
+}
+
+template <typename T>
+void selectionSort(T * array, int length){
+  int endIndex = length-1;
+  for(int current = 0; current < endIndex; current++){
+    
+    //calculate index of min val
+    int indexOfMin = current;
+    for(int index = current + 1; index <= endIndex; index++){
+      if(array[index] < array[indexOfMin])
+	indexOfMin = index;
+    }
+
+    //swap current with min
+    T temp = array[current];
+    array[current] = array[indexOfMin];
+    array[indexOfMin] = temp;
+
   }
 }
