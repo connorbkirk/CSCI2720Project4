@@ -2,7 +2,6 @@
 // What kind of overhead are we adding to each function?
 // Will each new instance of the function with a specified data type add time? Maybe
 
-
 template <typename T> 
 void bubbleSort(T * array, int length){
 
@@ -20,4 +19,24 @@ void bubbleSort(T * array, int length){
 			}
 		}
 	}
+}
+
+template <typename T>
+void insertionSort(T * array, int length){
+  bool finished = false;
+  int current = length-1;
+  bool moreToSearch = (current!=startIndex);
+  
+  while(moreToSearch && !finished){
+    if(values[current] < values[current-1]){
+      T temp = array[current];
+      array[current] = array[current-1];
+      array[current-1] = temp;
+
+      current--;
+      moreToSearch = (current != startIndex);
+    }
+    else
+      finished = true;
+  }
 }
