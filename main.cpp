@@ -24,7 +24,7 @@ int main(){
     safeStuff[i] = stuff[i];
   }
   //timestamp
-  bubbleSort(stuff, num);
+  BubbleSort(stuff, num);
   //timestamp
   //revert(stuff,safeStuff,num); reverts array back for the rest of the sort calls
 

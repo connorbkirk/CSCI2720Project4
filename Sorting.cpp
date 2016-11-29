@@ -3,7 +3,7 @@
 // Will each new instance of the function with a specified data type add time? Maybe
 
 template <typename T> 
-void bubbleSort(T * array, int length){
+void BubbleSort(T * array, int length){
 
 	// You know the drill
 
@@ -22,7 +22,7 @@ void bubbleSort(T * array, int length){
 }
 
 template <typename T>
-void insertionSort(T * array, int length){
+void InsertionSort(T * array, int length){
   bool finished = false;
   int current = length-1;
   bool moreToSearch = (current!=0);
@@ -42,7 +42,7 @@ void insertionSort(T * array, int length){
 }
 
 template <typename T>
-void selectionSort(T * array, int length){
+void SelectionSort(T * array, int length){
   int endIndex = length-1;
   for(int current = 0; current < endIndex; current++){
     
