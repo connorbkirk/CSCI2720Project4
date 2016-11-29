@@ -107,3 +107,69 @@ void HeapSort(T * array, int length){
     ReheapDown(array, 0, index-1);
   }
 }
+
+
+template <typename T>
+void MergeSort(T * array, int length){
+  DoMergeSort(array, 0, length-1);
+}
+
+template <typename T>
+void DoMergeSort(T * array, int first, int last){
+  //Post: the elements in array are sorted by key.
+  if(first < last){
+    int middle = (first + last) / 2;
+    DoMergeSort(array, first, middle);
+    DoMergeSort(array, middle + 1, last);
+    Merge(array, first, middle, middle + 1, last);
+  }
+}
+
+template <typename T>
+void Merge(T * array, int leftFirst, int leftLast, 
+	   int rightFirst, int rightLast){
+  // Post: array[leftFirst]..array[leftLast] and
+  //       array[rightFirst]..array[rightLast] have been merged.
+  //       array[leftFirst]..array[rightLast] are now sorted.
+
+  T * tempArray[200000];
+  int index = leftFirst;
+  int saveFirst = leftFirst;
+
+  while((leftFirst<=leftLast) && (rightFirst<=rightLast)){
+    if( array[leftFirst] < array[rightFirst]){
+      tempArray[index] = array[leftFirst];
+      leftFirst++;
+    }
+    else{
+      tempArray[index] = array[rightFirst];
+      rightFirst++;
+    }
+    index++;
+
+    while(leftFirst <= leftLast){
+      //Copy remaining items from left half.
+      tempArray[index] = array[leftFirst];
+      leftFirst++;
+      index++;
+    }
+
+    while(rightFirst <= rightLast){
+      //Copy remaining items from right half.
+      tempArray[index] = array[rightFirst];
+      rightFirst++;
+      index++;
+    }
+  }
+
+  for(index = saveFirst; index <= rightLast; index++)
+    array[index] = tempArray[index];
+
+  delete tempArray;
+}
+
+
+template <typename T>
+void QuickSort(T * array, int length){
+  
+}
