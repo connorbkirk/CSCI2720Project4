@@ -171,5 +171,62 @@ void Merge(T * array, int leftFirst, int leftLast,
 
 template <typename T>
 void QuickSort(T * array, int length){
-  
+  //This is the algorithm that is more
+  //space efficient. (log N)
+ 
+  DoQuickSort(array, 0, length-1);
+}
+
+template <typename T>
+void DoQuickSort(T * array, int first, int last){
+  if(first < last){
+    int splitPt1, splitPt2;
+
+    Split(array, first, last, splitPt1, splitPt2);
+
+    if(splitPt1 < last)
+      DoQuickSort(array, splitPt1, last);
+    if(first < splitPt2)
+      DoQuickSort(array, first, splitPt2);
+  }
+}
+
+template <typename T>
+void Split(T * array, int first, int last, int & splitPt1,
+	   int & splitPt2){
+  T splitVal = array[(first+last)/2];
+
+  bool onCorrectSide;
+  do{
+    onCorrectSide = true;
+    while(array[first] >= splitVal){
+      //move first toward last
+      if(array[first] >= splitVal)
+	onCorrectSide = false;
+      else
+	first++;
+    }
+
+    onCorrectSide = true;
+    while(onCorrectSide){
+      //move last toward first
+      if(array[last] <= splitVal)
+	onCorrectSide = false;
+      else
+	last--;
+    }
+
+    if(first <= last){
+      T temp = array[first];
+      array[first] = array[last];
+      array[last] = temp;
+
+      first++;
+      last--;
+    }
+
+  }while(first <= last);
+
+  splitPt1 = first;
+  splitPt2 = last;
 }
