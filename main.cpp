@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <array>
 #include "Sorting.h"
 
@@ -14,19 +15,41 @@ void revert(int*array, int* safe, int length){
     array[i] = safe[i];
 }
 
-int main(){
+int main(int argc, char * argv[]){
+
   int num;
+
+  cout << "Enter Length of array: ";
   cin >> num;
+
   int stuff[num];//array to sort
+
   int safeStuff[num];//never to be changed, only to reset from
+
   for(int i = 0; i < num; i++){//fills array with information from file
+	cout << "array["<< i <<"] = ";
     cin >> stuff[i];
     safeStuff[i] = stuff[i];
   }
+
+  cout << "Your Array: \n";
+
+  printArray(stuff, num);
+ 
   //timestamp
+
   BubbleSort(stuff, num);
+
   //timestamp
+
+  cout << "Sorted Array: \n";
+
+  printArray(stuff, num);
+ 
   //revert(stuff,safeStuff,num); reverts array back for the rest of the sort calls
 
+
+
+  
 
 }
