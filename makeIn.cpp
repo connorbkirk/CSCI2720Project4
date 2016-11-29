@@ -12,6 +12,11 @@
 
 using namespace std;
 
+
+
+
+
+
 //gets a random number from 0 to num*100(lessens likelyhood of duplicates)
 int getRand(int num){
   
