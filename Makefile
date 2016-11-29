@@ -1,4 +1,4 @@
-FILE = makeIn
+FILE = main
 
 compile:
 	g++ -std=gnu++11 $(FILE).cpp
