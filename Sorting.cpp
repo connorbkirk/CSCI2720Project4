@@ -2,31 +2,36 @@
 // What kind of overhead are we adding to each function?
 // Will each new instance of the function with a specified data type add time? Maybe
 
+extern int comparisons;
+
 template <typename T> 
-void BubbleSort(T * array, int length){
-	// You know the drill
+int BubbleSort(T * array, int length){
+  comparisons = 0;
 	for(int i = length - 1; i >= 1; i--){
 
 		for(int j  = 0; j < i; j++){
 			
 			if( array[j] > array[j+1] ){
-
+			  comparisons++;
 				T temp = array[j+1];
 				array[j+1] = array[j];
 				array[j] = temp;
 			}
 		}
 	}
+	return comparisons;
 }
 
 template <typename T>
-void InsertionSort(T * array, int length){
+int InsertionSort(T * array, int length){
+  comparisons = 0;
   bool finished = false;
   int current = length-1;
   bool moreToSearch = (current!=0);
   
   while(moreToSearch && !finished){
     if(array[current] < array[current-1]){
+      comparisons++;
       T temp = array[current];
       array[current] = array[current-1];
       array[current-1] = temp;
@@ -37,18 +42,21 @@ void InsertionSort(T * array, int length){
     else
       finished = true;
   }
+  return comparisons;
 }
 
 template <typename T>
-void SelectionSort(T * array, int length){
+int SelectionSort(T * array, int length){
   int endIndex = length-1;
   for(int current = 0; current < endIndex; current++){
     
     //calculate index of min val
     int indexOfMin = current;
     for(int index = current + 1; index <= endIndex; index++){
-      if(array[index] < array[indexOfMin])
+      if(array[index] < array[indexOfMin]){
+	comparisons++;
 	indexOfMin = index;
+      }
     }
 
     //swap current with min
@@ -57,6 +65,7 @@ void SelectionSort(T * array, int length){
     array[indexOfMin] = temp;
 
   }
+  return comparisons;
 }
 
 
@@ -68,15 +77,21 @@ void ReheapDown(T *& array, int root, int bottom){
   rightChild = root * 2 + 2;
 
   if(leftChild <= bottom){
-    if(leftChild == bottom)
+    comparisons++;
+    if(leftChild == bottom){
+      comparisons++;
       maxChild = leftChild;
+    }
     else{
-      if(array[leftChild] <= array[rightChild])
+      if(array[leftChild] <= array[rightChild]){
+	comparisons++;
 	maxChild = rightChild;
+      }
       else
 	maxChild = leftChild;
     }
     if(array[root] < array[maxChild]){
+      comparisons++;
       T temp = array[root];
       array[root] = array[maxChild];
       array[maxChild] = temp;
@@ -89,9 +104,9 @@ void ReheapDown(T *& array, int root, int bottom){
 
 
 template <typename T>
-void HeapSort(T * array, int length){
+int HeapSort(T * array, int length){
   int index;
-
+  comparisons=0;
   //convert array of values to a heap
   for(index = length/2-1; index >=0; index--)
     ReheapDown(array, index, length-1);
@@ -104,12 +119,16 @@ void HeapSort(T * array, int length){
 
     ReheapDown(array, 0, index-1);
   }
+  return comparisons;
 }
 
 
 template <typename T>
-void MergeSort(T * array, int length){
+int MergeSort(T * array, int length){
+  comparisons = 0;
+
   DoMergeSort(array, 0, length-1);
+  return comparisons;
 }
 
 template <typename T>
@@ -136,6 +155,7 @@ void Merge(T * array, int leftFirst, int leftLast,
 
   while((leftFirst<=leftLast) && (rightFirst<=rightLast)){
     if( array[leftFirst] < array[rightFirst]){
+      comparisons++;
       tempArray[index] = array[leftFirst];
       leftFirst++;
     }
@@ -168,11 +188,12 @@ void Merge(T * array, int leftFirst, int leftLast,
 
 
 template <typename T>
-void QuickSort(T * array, int length){
+int QuickSort(T * array, int length){
   //This is the algorithm that is more
   //space efficient. (log N)
- 
+  comparisons = 0;
   DoQuickSort(array, 0, length-1);
+  comparisons++;
 }
 
 template <typename T>
@@ -198,9 +219,12 @@ void Split(T * array, int first, int last, int & splitPt1,
   do{
     onCorrectSide = true;
     while(array[first] >= splitVal){
+      comparisons++;
       //move first toward last
-      if(array[first] >= splitVal)
+      if(array[first] >= splitVal){
+	comparisons++;
 	onCorrectSide = false;
+      }
       else
 	first++;
     }
@@ -208,8 +232,10 @@ void Split(T * array, int first, int last, int & splitPt1,
     onCorrectSide = true;
     while(onCorrectSide){
       //move last toward first
-      if(array[last] <= splitVal)
+      if(array[last] <= splitVal){
+	comparisons++;
 	onCorrectSide = false;
+      }	
       else
 	last--;
     }
