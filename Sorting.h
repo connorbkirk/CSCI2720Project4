@@ -3,15 +3,14 @@
 
 // SORTING FUNCTION PROTOTYPES
 
-template <typename T> void bubbleSort(T *, int);
-template <typename T> void insertionSort(T *, int);
-template <typename T> void selectionSort(T *, int);
+template <typename T> void BubbleSort(T *, int);
+template <typename T> void InsertionSort(T *, int);
+template <typename T> void SelectionSort(T *, int);
 
-template <typename T> void mergeSort(T *, int);
-template <typename T> void heapSort(T *, int);
-template <typename T> void quickSort(T *, int);
+template <typename T> void MergeSort(T *, int);
+template <typename T> void HeapSort(T *, int);
+template <typename T> void QuickSort(T *, int);
 
- 
 
 #include "Sorting.cpp"
 
