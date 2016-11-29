@@ -4,9 +4,7 @@
 
 template <typename T> 
 void BubbleSort(T * array, int length){
-
 	// You know the drill
-
 	for(int i = length - 1; i >= 1; i--){
 
 		for(int j  = 0; j < i; j++){
