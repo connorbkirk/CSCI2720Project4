@@ -2,10 +2,12 @@
 // What kind of overhead are we adding to each function?
 // Will each new instance of the function with a specified data type add time? Maybe
 
-extern int comparisons;
+#include "Sorting.h"
+
+int comparisons;
 
 template <typename T> 
-int BubbleSort(T * array, int length){
+int Sorting<T>::BubbleSort(T * array, int length){
   comparisons = 0;
   for(int i = length - 1; i >= 1; i--){
     
@@ -24,7 +26,7 @@ int BubbleSort(T * array, int length){
 }
 
 template <typename T>
-int InsertionSort(T * array, int length){
+int Sorting<T>::InsertionSort(T * array, int length){
   comparisons = 0;
   bool finished = false;
   int current = length-1;
@@ -47,7 +49,7 @@ int InsertionSort(T * array, int length){
 }
 
 template <typename T>
-int SelectionSort(T * array, int length){
+int Sorting<T>::SelectionSort(T * array, int length){
   int endIndex = length-1;
   for(int current = 0; current < endIndex; current++){
     
@@ -102,7 +104,7 @@ void ReheapDown(T *& array, int root, int bottom){
 
 
 template <typename T>
-int HeapSort(T * array, int length){
+int Sorting<T>::HeapSort(T * array, int length){
   int index;
   comparisons=0;
   //convert array of values to a heap
@@ -123,7 +125,7 @@ int HeapSort(T * array, int length){
 
 
 template <typename T>
-int MergeSort(T * array, int length){
+int Sorting<T>::MergeSort(T * array, int length){
   comparisons = 0;
 
   DoMergeSort(array, 0, length-1);
@@ -187,7 +189,7 @@ void Merge(T * array, int leftFirst, int leftLast,
 
 
 template <typename T>
-int QuickSort(T * array, int length){
+int Sorting<T>::QuickSort(T * array, int length){
   //This is the algorithm that is more
   //space efficient. (log N)
   comparisons = 0;
