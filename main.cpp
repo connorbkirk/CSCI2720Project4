@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <array>
 #include "Sorting.h"
 
 using namespace std;
@@ -38,7 +37,7 @@ int main(int argc, char * argv[]){
  
   //timestamp
 
-  BubbleSort(stuff, num);
+  cout << "Numer of comparisons: " << BubbleSort(stuff, num) << endl;
 
   //timestamp
 
