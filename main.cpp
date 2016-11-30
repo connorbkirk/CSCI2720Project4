@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <ctime>
+
 #include "Sorting.h"
 
 using namespace std;
@@ -17,6 +19,7 @@ void revert(int*array, int* safe, int length){
 int main(int argc, char * argv[]){
 
   int num;
+  Sorting sorting;
 
   cout << "Enter Length of array: ";
   cin >> num;
@@ -35,11 +38,14 @@ int main(int argc, char * argv[]){
 
   printArray(stuff, num);
  
-  //timestamp
+  clock_t begin = clock();
 
-  cout << "Numer of comparisons: " << BubbleSort(stuff, num) << endl;
+  cout << "Numer of comparisons: " << sorting.BubbleSort(stuff, num) << endl;
 
-  //timestamp
+  clock_t end = clock();
+  double elapsedTime = double(end-begin) / CLOCKS_PER_SEC * 1000;
+
+  cout << "Elapsed time: " << elapsedTime << "ms\n";
 
   cout << "Sorted Array: \n";
 
