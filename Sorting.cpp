@@ -3,6 +3,9 @@
 // Will each new instance of the function with a specified data type add time? Maybe
 
 #include "Sorting.h"
+#include <iostream>
+
+using namespace std;
 
 int comparisons;
 
@@ -182,27 +185,35 @@ void Split(int * array, int first, int last, int & splitPt1,
   int splitVal = array[(first+last)/2];
 
   bool onCorrectSide;
+
   do{
     onCorrectSide = true;
+    
+    comparisons++;
     while(array[first] >= splitVal){
+      
       comparisons+=2; //one for while and one for if
       //move first toward last
+      
       if(array[first] >= splitVal)
-	onCorrectSide = false;
+     	onCorrectSide = false;
       else
-	first++;
+	    first++;
     }
 
     onCorrectSide = true;
+    
+    comparisons++;
     while(onCorrectSide){
       //move last toward first
       comparisons++;
       if(array[last] <= splitVal)
-	onCorrectSide = false;
+     	onCorrectSide = false;
       else
-	last--;
+     	last--;
     }
 
+    comparisons++;
     if(first <= last){
       int temp = array[first];
       array[first] = array[last];
@@ -219,13 +230,18 @@ void Split(int * array, int first, int last, int & splitPt1,
 }
 
 void DoQuickSort(int * array, int first, int last){
+  
+  comparisons++;
   if(first < last){
     int splitPt1, splitPt2;
 
     Split(array, first, last, splitPt1, splitPt2);
 
+    comparisons++;
     if(splitPt1 < last)
       DoQuickSort(array, splitPt1, last);
+
+    comparisons++;
     if(first < splitPt2)
       DoQuickSort(array, first, splitPt2);
   }
@@ -234,6 +250,9 @@ void DoQuickSort(int * array, int first, int last){
 int Sorting::QuickSort(int * array, int length){
   //This is the algorithm that is more
   //space efficient O(logN)
+
+  cout << "inside quicksort" << endl;
+
   comparisons = 0;
   DoQuickSort(array, 0, length-1);
   return comparisons;
