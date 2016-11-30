@@ -7,19 +7,20 @@ extern int comparisons;
 template <typename T> 
 int BubbleSort(T * array, int length){
   comparisons = 0;
-	for(int i = length - 1; i >= 1; i--){
+  for(int i = length - 1; i >= 1; i--){
+    
+    for(int j  = 0; j < i; j++){
+      
+      comparisons++;
+      if( array[j] > array[j+1] ){
+	T temp = array[j+1];
+	array[j+1] = array[j];
+	array[j] = temp;
+      }
+    }
+  }
 
-		for(int j  = 0; j < i; j++){
-			
-			if( array[j] > array[j+1] ){
-			  comparisons++;
-				T temp = array[j+1];
-				array[j+1] = array[j];
-				array[j] = temp;
-			}
-		}
-	}
-	return comparisons;
+  return comparisons;
 }
 
 template <typename T>
@@ -30,8 +31,8 @@ int InsertionSort(T * array, int length){
   bool moreToSearch = (current!=0);
   
   while(moreToSearch && !finished){
+    comparisons++;
     if(array[current] < array[current-1]){
-      comparisons++;
       T temp = array[current];
       array[current] = array[current-1];
       array[current-1] = temp;
@@ -53,10 +54,9 @@ int SelectionSort(T * array, int length){
     //calculate index of min val
     int indexOfMin = current;
     for(int index = current + 1; index <= endIndex; index++){
-      if(array[index] < array[indexOfMin]){
-	comparisons++;
+      comparisons++;
+      if(array[index] < array[indexOfMin])
 	indexOfMin = index;
-      }
     }
 
     //swap current with min
@@ -76,22 +76,20 @@ void ReheapDown(T *& array, int root, int bottom){
   leftChild = root * 2 + 1;
   rightChild = root * 2 + 2;
 
+  comparisons++;
   if(leftChild <= bottom){
     comparisons++;
-    if(leftChild == bottom){
-      comparisons++;
+    if(leftChild == bottom)
       maxChild = leftChild;
-    }
     else{
-      if(array[leftChild] <= array[rightChild]){
-	comparisons++;
+      comparisons++;
+      if(array[leftChild] <= array[rightChild])
 	maxChild = rightChild;
-      }
       else
 	maxChild = leftChild;
     }
+    comparisons++;
     if(array[root] < array[maxChild]){
-      comparisons++;
       T temp = array[root];
       array[root] = array[maxChild];
       array[maxChild] = temp;
@@ -119,6 +117,7 @@ int HeapSort(T * array, int length){
 
     ReheapDown(array, 0, index-1);
   }
+
   return comparisons;
 }
 
@@ -154,8 +153,8 @@ void Merge(T * array, int leftFirst, int leftLast,
   int saveFirst = leftFirst;
 
   while((leftFirst<=leftLast) && (rightFirst<=rightLast)){
+    comparisons++;
     if( array[leftFirst] < array[rightFirst]){
-      comparisons++;
       tempArray[index] = array[leftFirst];
       leftFirst++;
     }
@@ -219,12 +218,10 @@ void Split(T * array, int first, int last, int & splitPt1,
   do{
     onCorrectSide = true;
     while(array[first] >= splitVal){
-      comparisons++;
+      comparisons+=2; //one for while and one for if
       //move first toward last
-      if(array[first] >= splitVal){
-	comparisons++;
+      if(array[first] >= splitVal)
 	onCorrectSide = false;
-      }
       else
 	first++;
     }
@@ -232,10 +229,9 @@ void Split(T * array, int first, int last, int & splitPt1,
     onCorrectSide = true;
     while(onCorrectSide){
       //move last toward first
-      if(array[last] <= splitVal){
-	comparisons++;
+      comparisons++;
+      if(array[last] <= splitVal)
 	onCorrectSide = false;
-      }	
       else
 	last--;
     }
