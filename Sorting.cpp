@@ -27,11 +27,10 @@ int Sorting::BubbleSort(int * array, int length){
   return comparisons;
 }
 
-int Sorting::InsertionSort(int * array, int length){
-  comparisons = 0;
+void InsertItem(int * array, int start, int end){
   bool finished = false;
-  int current = length-1;
-  bool moreToSearch = (current!=0);
+  int current = end;
+  bool moreToSearch = (current!=start);
   
   while(moreToSearch && !finished){
     comparisons++;
@@ -41,11 +40,18 @@ int Sorting::InsertionSort(int * array, int length){
       array[current-1] = temp;
 
       current--;
-      moreToSearch = (current != 0);
+      moreToSearch = (current != start);
     }
     else
       finished = true;
   }
+
+}
+
+int Sorting::InsertionSort(int * array, int length){
+  comparisons = 0;
+  for(int i = 0; i < length; i++)
+    InsertItem(array, 0, i);
   return comparisons;
 }
 
@@ -189,21 +195,15 @@ void Split(int * array, int first, int last, int & splitPt1,
   do{
     onCorrectSide = true;
     
-    comparisons++;
-    while(array[first] >= splitVal){
-      
-      comparisons+=2; //one for while and one for if
-      //move first toward last
-      
+    while(onCorrectSide){
+      comparisons++; 
       if(array[first] >= splitVal)
      	onCorrectSide = false;
       else
-	    first++;
+	first++;
     }
 
     onCorrectSide = true;
-    
-    comparisons++;
     while(onCorrectSide){
       //move last toward first
       comparisons++;
@@ -250,8 +250,6 @@ void DoQuickSort(int * array, int first, int last){
 int Sorting::QuickSort(int * array, int length){
   //This is the algorithm that is more
   //space efficient O(logN)
-
-  cout << "inside quicksort" << endl;
 
   comparisons = 0;
   DoQuickSort(array, 0, length-1);
