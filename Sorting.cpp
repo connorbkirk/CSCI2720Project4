@@ -127,12 +127,12 @@ int Sorting::HeapSort(int * array, int length){
 }
 
 void Merge(int * array, int leftFirst, int leftLast, 
-	   int rightFirst, int rightLast){
+	   int rightFirst, int rightLast, int length){
   // Post: array[leftFirst]..array[leftLast] and
   //       array[rightFirst]..array[rightLast] have been merged.
   //       array[leftFirst]..array[rightLast] are now sorted.
 
-  int * tempArray = new int[200000];
+  int * tempArray = new int[length];
   int index = leftFirst;
   int saveFirst = leftFirst;
 
@@ -147,20 +147,19 @@ void Merge(int * array, int leftFirst, int leftLast,
       rightFirst++;
     }
     index++;
+  }
+  while(leftFirst <= leftLast){
+    //Copy remaining items from left half.
+    tempArray[index] = array[leftFirst];
+    leftFirst++;
+    index++;
+  }
 
-    while(leftFirst <= leftLast){
-      //Copy remaining items from left half.
-      tempArray[index] = array[leftFirst];
-      leftFirst++;
-      index++;
-    }
-
-    while(rightFirst <= rightLast){
-      //Copy remaining items from right half.
-      tempArray[index] = array[rightFirst];
-      rightFirst++;
-      index++;
-    }
+  while(rightFirst <= rightLast){
+    //Copy remaining items from right half.
+    tempArray[index] = array[rightFirst];
+    rightFirst++;
+    index++;
   }
 
   for(index = saveFirst; index <= rightLast; index++)
@@ -169,20 +168,20 @@ void Merge(int * array, int leftFirst, int leftLast,
   delete [] tempArray;
 }
 
-void DoMergeSort(int * array, int first, int last){
+void DoMergeSort(int * array, int first, int last, int length){
   //Post: the elements in array are sorted by key.
   if(first < last){
     int middle = (first + last) / 2;
-    DoMergeSort(array, first, middle);
-    DoMergeSort(array, middle + 1, last);
-    Merge(array, first, middle, middle + 1, last);
+    DoMergeSort(array, first, middle, length);
+    DoMergeSort(array, middle + 1, last, length);
+    Merge(array, first, middle, middle + 1, last, length);
   }
 }
 
 int Sorting::MergeSort(int * array, int length){
   comparisons = 0;
 
-  DoMergeSort(array, 0, length-1);
+  DoMergeSort(array, 0, length-1, length);
   return comparisons;
 }
 
