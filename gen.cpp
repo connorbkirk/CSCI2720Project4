@@ -15,7 +15,11 @@ using namespace std;
 
 
 int getRand(vector<int> & v){
- 
+  // Function: This method takes a vector as a parameter.
+  //       It randomly selects a number, deletes it from the
+  //       vector, and returns it.
+  // Pre:  none.
+  // Post: returns a randomly selected number from v.
   int i  = rand();
   i = i % v.size();
 
@@ -25,8 +29,17 @@ int getRand(vector<int> & v){
   return a;
 }
 
-void creatfile(int num, bool sorted, bool reverse, string name){//opens file and fills it
-
+void creatfile(int num, bool sorted, bool reverse, string name){
+  // Function: This method takes 4 parameters: the number of 
+  //       integers, a bool telling whether or not the data
+  //       should be sorted, a bool telling if the data should
+  //       be reversed, and the name of the file to create. This
+  //       method then creates a file of random integers pertaining
+  //       to that criteria.
+  // Pre:  None.
+  // Post: A file is created with the given name, with the the 
+  //       specified constraints.
+  
   vector<int> v;
 
   for(int i = 1; i <= num; i++){
@@ -61,8 +74,10 @@ void creatfile(int num, bool sorted, bool reverse, string name){//opens file and
   myfile.close();
 }
 
-int main(int argc, char* argv[]){//reads flags and number of integers
-
+int main(int argc, char* argv[]){
+  // Function: this is the main method that genereates files.
+  // Pre:  none.
+  // Post: The required data files are created.
   bool sorted = false;  
   bool reverse = false;
   int num = 0;
