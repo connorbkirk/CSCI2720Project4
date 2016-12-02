@@ -5,3 +5,12 @@ Group members:
 Carter Hart
 Andrew Durden
 Connor Kirk
+
+To compile our code type:
+   $ make compile
+
+To run the code type:
+   $ make run
+
+To clean the directory type:
+   $ make clean
