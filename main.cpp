@@ -73,7 +73,6 @@ revert(stuff, safeStuff, num);
 //---------------------- 
 // SELECTION SORT
 //---------------------- 
-
 cout << "Selection Sort:\n";
 
 begin = clock();
@@ -88,7 +87,6 @@ revert(stuff, safeStuff, num);
 //---------------------- 
 // MERGE SORT
 //---------------------- 
-
 cout << "Merge Sort:\n";
 
 begin = clock();
